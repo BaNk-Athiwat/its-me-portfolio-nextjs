@@ -1,103 +1,597 @@
+"use client";
+
 import Image from "next/image";
+import React, { useState, useEffect } from "react";
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+const Portfolio = () => {
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [activeSection, setActiveSection] = useState("home");
+	const [isScrolled, setIsScrolled] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
-}
+	const cvShareLink = process.env.NEXT_PUBLIC_CV_DRIVE_LINK;
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setIsScrolled(window.scrollY > 50);
+		};
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, []);
+
+	const skills = [
+		{
+			name: "React/Next.js",
+			level: 70,
+			icon: <i className="fa-solid fa-code text-xl"></i>,
+		},
+		{
+			name: "UI/UX Design",
+			level: 50,
+			icon: <i className="fa-solid fa-palette text-xl"></i>,
+		},
+		{
+			name: "Mobile Dev",
+			level: 82,
+			icon: <i className="fa-solid fa-mobile-screen text-xl"></i>,
+		},
+		{
+			name: "Full Stack",
+			level: 90,
+			icon: <i className="fa-solid fa-globe text-xl"></i>,
+		},
+	];
+
+	const projects = [
+		{
+			title: "E-commerce Platform",
+			description:
+				"Modern e-commerce solution built with Next.js 15, featuring advanced search, payment integration, and real-time inventory.",
+			image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop",
+			tech: ["Next.js 15", "TypeScript", "Stripe", "PostgreSQL"],
+			github: "#",
+			demo: "#",
+		},
+		{
+			title: "AI Dashboard",
+			description:
+				"Analytics dashboard with AI-powered insights, real-time data visualization, and predictive analytics.",
+			image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop",
+			tech: ["React", "D3.js", "Python", "TensorFlow"],
+			github: "#",
+			demo: "#",
+		},
+		{
+			title: "Mobile Banking App",
+			description:
+				"Secure mobile banking application with biometric authentication and seamless UX design.",
+			image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=500&h=300&fit=crop",
+			tech: ["React Native", "Node.js", "MongoDB", "Auth0"],
+			github: "#",
+			demo: "#",
+		},
+	];
+
+	const scrollToSection = (sectionId: string) => {
+		const element = document.getElementById(sectionId);
+		if (element) {
+			element.scrollIntoView({ behavior: "smooth" });
+			setActiveSection(sectionId);
+			setIsMenuOpen(false);
+		}
+	};
+
+	const handleDownload = async () => {
+		console.log("cvShareLink:", cvShareLink);
+
+		if (!cvShareLink) {
+			alert("CV link not configured");
+			return;
+		}
+
+		setIsLoading(true);
+		try {
+			const directLink = convertToDirectDownloadLink(cvShareLink);
+
+			if (!directLink) {
+				throw new Error("Invalid Google Drive link");
+			}
+
+			// Create download link
+			const link = document.createElement("a");
+			link.href = directLink;
+			link.download = "cv_athiwat.pdf";
+			link.target = "_blank"; // Open in new tab for direct download
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+		} catch (error) {
+			console.error("Download failed:", error);
+			alert("ไม่สามารถดาวน์โหลดได้ กรุณาลองใหม่อีกครั้ง");
+		} finally {
+			// setIsLoading(false);
+			setTimeout(() => setIsLoading(false), 800);
+		}
+	};
+
+	const convertToDirectDownloadLink = (shareLink: string) => {
+		const fileId = shareLink.match(/\/d\/(.+?)\//)?.[1];
+		if (!fileId) return null;
+
+		// Convert to direct download link
+		// return `https://drive.google.com/uc?export=download&id=${fileId}`;
+		return `https://drive.google.com/file/d/${fileId}/view`;
+	};
+
+	return (
+		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-gray-900">
+			{/* Navigation */}
+			<nav
+				className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+					isScrolled
+						? "bg-slate-900/95 backdrop-blur-md shadow-xl"
+						: "bg-transparent"
+				}`}
+			>
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div className="flex justify-between items-center py-4">
+						<div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text [-webkit-background-clip:text] text-transparent">
+							It&apos;s Me
+						</div>
+
+						{/* Desktop Menu */}
+						<div className="hidden md:flex space-x-8">
+							{[
+								"home",
+								"about",
+								"skills",
+								"projects",
+								"contact",
+							].map((item) => (
+								<button
+									key={item}
+									onClick={() => scrollToSection(item)}
+									className={`capitalize text-sm font-medium transition-colors hover:text-cyan-400 ${
+										activeSection === item
+											? "text-cyan-400"
+											: "text-white"
+									}`}
+								>
+									{item}
+								</button>
+							))}
+						</div>
+
+						{/* Mobile Menu Button */}
+						<button
+							onClick={() => setIsMenuOpen(!isMenuOpen)}
+							className="md:hidden text-white hover:text-cyan-400 transition-colors"
+						>
+							{isMenuOpen ? (
+								<i className="fa-solid fa-xmark text-2xl"></i>
+							) : (
+								<i className="fa-solid fa-bars text-2xl"></i>
+							)}
+						</button>
+					</div>
+				</div>
+
+				{/* Mobile Menu */}
+				{isMenuOpen && (
+					<div className="md:hidden bg-slate-900/95 backdrop-blur-md">
+						<div className="px-2 pt-2 pb-3 space-y-1">
+							{[
+								"home",
+								"about",
+								"skills",
+								"projects",
+								"contact",
+							].map((item) => (
+								<button
+									key={item}
+									onClick={() => scrollToSection(item)}
+									className="block px-3 py-2 capitalize text-white hover:text-cyan-400 transition-colors"
+								>
+									{item}
+								</button>
+							))}
+						</div>
+					</div>
+				)}
+			</nav>
+
+			{/* Hero Section */}
+			<section
+				id="home"
+				className="min-h-screen flex items-center justify-center px-4"
+			>
+				<div className="text-center max-w-4xl mx-auto">
+					<div className="mb-8 relative mt-20">
+						<div className="w-40 h-40 mx-auto rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 p-1">
+							<div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center">
+								<Image
+									src="/images/img_profile.jpg"
+									alt="Profile"
+									width={150}
+									height={150}
+									className="w-36 h-36 rounded-full object-cover"
+								/>
+							</div>
+						</div>
+						<div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full blur-xl animate-pulse"></div>
+					</div>
+
+					<h1 className="text-4xl md:text-5xl font-bold mb-6">
+						<span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text [-webkit-background-clip:text] text-transparent">
+							Athiwat Sitthinanwatthana
+						</span>
+					</h1>
+
+					<p className="text-xl md:text-xl text-blue-200 mb-8 font-light">
+						Software Developer & Full Stack Developer
+					</p>
+
+					<p className="text-lg text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+						I&apos;m just a programmer with a passion for coding and
+						having fun while doing it. Solving complex problems and
+						turning them into simple, practical solutions is what I
+						find truly challenging
+					</p>
+
+					<div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+						<button
+							onClick={() => scrollToSection("projects")}
+							className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 rounded-full font-medium hover:shadow-lg hover:shadow-blue-500/25 transform hover:scale-105 transition-all duration-300"
+						>
+							View My Work
+						</button>
+						<button
+							onClick={handleDownload}
+							disabled={isLoading}
+							className="border-2 border-cyan-400 text-cyan-400 px-8 py-4 rounded-full font-medium hover:bg-cyan-400 hover:text-slate-900 transition-all duration-300 flex items-center gap-2 justify-center"
+						>
+							{/* <i className="fa-solid fa-download text-xl"></i>
+							Download CV */}
+							{isLoading ? (
+								<>
+									<svg
+										className="animate-spin -ml-1 mr-3 h-5 w-5"
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+									>
+										<circle
+											className="opacity-25"
+											cx="12"
+											cy="12"
+											r="10"
+											stroke="currentColor"
+											strokeWidth="4"
+										></circle>
+										<path
+											className="opacity-75"
+											fill="currentColor"
+											d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+										></path>
+									</svg>
+									Loading...
+								</>
+							) : (
+								<>
+									<i className="fa-solid fa-download text-xl"></i>
+									Download CV
+								</>
+							)}
+						</button>
+					</div>
+
+					<div className="animate-bounce">
+						{/* <ChevronDown className="w-8 h-8 text-cyan-400 mx-auto" /> */}
+						<i className="fa-solid fa-chevron-down text-xl"></i>
+					</div>
+				</div>
+			</section>
+
+			{/* About Section */}
+			<section id="about" className="py-20 px-4">
+				<div className="max-w-6xl mx-auto">
+					<h2 className="text-2xl md:text-3xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text [-webkit-background-clip:text] text-transparent">
+						About Me
+					</h2>
+
+					<div className="grid md:grid-cols-2 gap-12 items-center">
+						<div className="space-y-6 text-center">
+							<p className="text-gray-300 text-lg leading-relaxed">
+								Software developer with experience in website
+								and API development. I am currently one of the
+								developers for RESTful API. I also worked as a
+								full stack developer, focusing on both frontend
+								and backend tasks. My experience of around 3
+								years in software development makes me familiar
+								with many tools and frameworks, and I have an
+								understanding of basic security.
+							</p>
+
+							<p className="text-gray-300 text-lg leading-relaxed">
+								Of course, I do not have a degree in computer
+								science or IT, but it does not stop me from
+								doing my job well.
+							</p>
+
+							{/* <div className="grid grid-cols-2 gap-6 pt-6"> */}
+							<div className="flex gap-6 pt-6">
+								{/* <div className="text-center p-6 bg-slate-800/50 rounded-xl border border-cyan-500/20">
+									<div className="text-3xl font-bold text-cyan-400 mb-2">
+										50+
+									</div>
+									<div className="text-gray-300">
+										Projects Completed
+									</div>
+								</div> */}
+								<div className="text-center p-6 bg-slate-800/50 rounded-xl border border-cyan-500/20 grow">
+									<div className="text-3xl font-bold text-blue-400 mb-2">
+										3
+									</div>
+									<div className="text-gray-300">
+										Years Experience
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div className="relative">
+							<div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-2xl p-8 border border-cyan-500/20">
+								<Image
+									src="/images/img_about_me.jpg"
+									alt="Workspace"
+									width={200}
+									height={300}
+									className="w-full h-50 md:h-100 object-cover rounded-xl"
+								/>
+								{/* <img
+									src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=400&fit=crop"
+									alt="Workspace"
+									className="w-full h-64 object-cover rounded-xl"
+								/> */}
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			{/* Skills Section */}
+			<section id="skills" className="py-20 px-4 bg-slate-800/30">
+				<div className="max-w-6xl mx-auto">
+					<h2 className="text-2xl md:text-3xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text [-webkit-background-clip:text] text-transparent">
+						Skills & Expertise
+					</h2>
+
+					<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+						{skills.map((skill, index) => (
+							<div
+								key={index}
+								className="bg-slate-800/50 p-6 rounded-xl border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300 group"
+							>
+								<div className="flex items-center gap-4 mb-4">
+									<div className="text-cyan-400 group-hover:scale-110 transition-transform duration-300">
+										{skill.icon}
+									</div>
+									<h3 className="text-white font-semibold">
+										{skill.name}
+									</h3>
+								</div>
+
+								<div className="relative">
+									<div className="w-full bg-slate-700 rounded-full h-2">
+										<div
+											className="bg-gradient-to-r from-blue-500 to-cyan-500 h-2 rounded-full transition-all duration-1000 ease-out"
+											style={{ width: `${skill.level}%` }}
+										></div>
+									</div>
+									<span className="text-sm text-cyan-400 mt-2 block">
+										{skill.level}%
+									</span>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			{/* Projects Section */}
+			<section id="projects" className="py-20 px-4">
+				<div className="max-w-6xl mx-auto">
+					<h2 className="text-2xl md:text-3xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text [-webkit-background-clip:text] text-transparent">
+						My Projects
+					</h2>
+
+					<div className="grid lg:grid-cols-3 gap-8">
+						{projects.map((project, index) => (
+							<div
+								key={index}
+								className="bg-slate-800/50 rounded-xl overflow-hidden border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300 group hover:transform hover:scale-105"
+							>
+								<div className="relative overflow-hidden">
+									<Image
+										src={project.image}
+										alt={project.title}
+										width={500}
+										height={300}
+										className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+									/>
+									{/* <img
+										src={project.image}
+										alt={project.title}
+										className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+									/> */}
+									<div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+								</div>
+
+								<div className="p-6">
+									<h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors duration-300">
+										{project.title}
+									</h3>
+									<p className="text-gray-300 mb-4 leading-relaxed">
+										{project.description}
+									</p>
+
+									<div className="flex flex-wrap gap-2 mb-4">
+										{project.tech.map((tech, techIndex) => (
+											<span
+												key={techIndex}
+												className="bg-cyan-500/20 text-cyan-300 px-3 py-1 rounded-full text-sm border border-cyan-500/30"
+											>
+												{tech}
+											</span>
+										))}
+									</div>
+
+									<div className="flex gap-4">
+										<a
+											href={project.github}
+											className="flex items-center gap-2 text-gray-400 hover:text-cyan-400 transition-colors duration-300"
+										>
+											{/* <Github className="w-5 h-5" /> */}
+											<i className="fa-brands fa-github text-xl"></i>
+											<span>Code</span>
+										</a>
+										<a
+											href={project.demo}
+											className="flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors duration-300"
+										>
+											{/* <ExternalLink className="w-5 h-5" /> */}
+											<i className="fa-solid fa-arrow-up-right-from-square text-xl"></i>
+											<span>Demo</span>
+										</a>
+									</div>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			{/* Contact Section */}
+			<section id="contact" className="py-20 px-4 bg-slate-800/30">
+				<div className="max-w-4xl mx-auto">
+					<h2 className="text-2xl md:text-3xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text [-webkit-background-clip:text] text-transparent">
+						Education
+					</h2>
+					{/* <div className="grid md:grid-cols-2 gap-12">
+						<div className="space-y-8">
+							<div className="flex items-center gap-4 p-6 bg-slate-800/50 rounded-xl border border-cyan-500/20">
+								<Mail className="w-6 h-6 text-cyan-400" />
+								<div>
+									<h3 className="text-white font-semibold">
+										Email
+									</h3>
+									<p className="text-gray-300">
+										alex@portfolio.dev
+									</p>
+								</div>
+							</div>
+
+							<div className="flex items-center gap-4 p-6 bg-slate-800/50 rounded-xl border border-cyan-500/20">
+								<Phone className="w-6 h-6 text-cyan-400" />
+								<div>
+									<h3 className="text-white font-semibold">
+										Phone
+									</h3>
+									<p className="text-gray-300">
+										+1 (555) 123-4567
+									</p>
+								</div>
+							</div>
+
+							<div className="flex items-center gap-4 p-6 bg-slate-800/50 rounded-xl border border-cyan-500/20">
+								<MapPin className="w-6 h-6 text-cyan-400" />
+								<div>
+									<h3 className="text-white font-semibold">
+										Location
+									</h3>
+									<p className="text-gray-300">
+										San Francisco, CA
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div className="space-y-6">
+							<div>
+								<input
+									type="text"
+									placeholder="Your Name"
+									className="w-full bg-slate-800/50 border border-cyan-500/20 rounded-xl px-6 py-4 text-white placeholder-gray-400 focus:border-cyan-500 focus:outline-none transition-colors duration-300"
+								/>
+							</div>
+
+							<div>
+								<input
+									type="email"
+									placeholder="Your Email"
+									className="w-full bg-slate-800/50 border border-cyan-500/20 rounded-xl px-6 py-4 text-white placeholder-gray-400 focus:border-cyan-500 focus:outline-none transition-colors duration-300"
+								/>
+							</div>
+
+							<div>
+								<textarea
+									rows={5}
+									placeholder="Your Message"
+									className="w-full bg-slate-800/50 border border-cyan-500/20 rounded-xl px-6 py-4 text-white placeholder-gray-400 focus:border-cyan-500 focus:outline-none transition-colors duration-300 resize-none"
+								></textarea>
+							</div>
+
+							<button
+								className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-4 rounded-xl font-medium hover:shadow-lg hover:shadow-cyan-500/25 transform hover:scale-105 transition-all duration-300"
+								onClick={() =>
+									alert("Message sent! (Demo only)")
+								}
+							>
+								Send Message
+							</button>
+						</div>
+					</div> */}
+				</div>
+			</section>
+
+			{/* Footer */}
+			<footer className="py-12 border-t border-slate-700">
+				<div className="max-w-6xl mx-auto px-4">
+					<div className="flex flex-col md:flex-row justify-between items-center text-sm">
+						<div className="text-gray-400 mb-4 md:mb-0">
+							© 2025 Athiwat Sitthinanwatthana. All rights
+							reserved.
+						</div>
+
+						<div className="flex items-center gap-6">
+							<span className="text-gray-400">
+								อธิวัฒน์ สิทธินันท์วัฒนา
+							</span>
+							<a
+								href="#"
+								className="text-gray-400 hover:text-cyan-400 transition-colors duration-300"
+							>
+								{/* <Github className="w-6 h-6" /> */}
+								<i className="fa-brands fa-github text-2xl"></i>
+							</a>
+							{/* <a
+								href="#"
+								className="text-gray-400 hover:text-cyan-400 transition-colors duration-300"
+							>
+								<Linkedin className="w-6 h-6" />
+							</a>
+							<a
+								href="#"
+								className="text-gray-400 hover:text-cyan-400 transition-colors duration-300"
+							>
+								<Twitter className="w-6 h-6" />
+							</a> */}
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	);
+};
+
+export default Portfolio;
