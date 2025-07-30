@@ -250,8 +250,6 @@ const Portfolio = () => {
 							disabled={isLoading}
 							className="border-2 border-cyan-400 text-cyan-400 px-8 py-4 rounded-full font-medium hover:bg-cyan-400 hover:text-slate-900 transition-all duration-300 flex items-center gap-2 justify-center"
 						>
-							{/* <i className="fa-solid fa-download text-xl"></i>
-							Download CV */}
 							{isLoading ? (
 								<>
 									<svg
@@ -286,7 +284,6 @@ const Portfolio = () => {
 					</div>
 
 					<div className="animate-bounce">
-						{/* <ChevronDown className="w-8 h-8 text-cyan-400 mx-auto" /> */}
 						<i className="fa-solid fa-chevron-down text-xl"></i>
 					</div>
 				</div>
@@ -320,14 +317,6 @@ const Portfolio = () => {
 
 							{/* <div className="grid grid-cols-2 gap-6 pt-6"> */}
 							<div className="flex gap-6 pt-6">
-								{/* <div className="text-center p-6 bg-slate-800/50 rounded-xl border border-cyan-500/20">
-									<div className="text-3xl font-bold text-cyan-400 mb-2">
-										50+
-									</div>
-									<div className="text-gray-300">
-										Projects Completed
-									</div>
-								</div> */}
 								<div className="text-center p-6 bg-slate-800/50 rounded-xl border border-cyan-500/20 grow">
 									<div className="text-3xl font-bold text-blue-400 mb-2">
 										3
@@ -348,11 +337,6 @@ const Portfolio = () => {
 									height={300}
 									className="w-full h-50 md:h-100 object-cover rounded-xl"
 								/>
-								{/* <img
-									src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&h=400&fit=crop"
-									alt="Workspace"
-									className="w-full h-64 object-cover rounded-xl"
-								/> */}
 							</div>
 						</div>
 					</div>
@@ -419,11 +403,6 @@ const Portfolio = () => {
 										height={300}
 										className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
 									/>
-									{/* <img
-										src={project.image}
-										alt={project.title}
-										className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-									/> */}
 									<div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 								</div>
 
@@ -475,82 +454,11 @@ const Portfolio = () => {
 			<section id="contact" className="py-20 px-4 bg-slate-800/30">
 				<div className="max-w-4xl mx-auto">
 					<h2 className="text-2xl md:text-3xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text [-webkit-background-clip:text] text-transparent">
-						Education
+						Contact Me
 					</h2>
-					{/* <div className="grid md:grid-cols-2 gap-12">
-						<div className="space-y-8">
-							<div className="flex items-center gap-4 p-6 bg-slate-800/50 rounded-xl border border-cyan-500/20">
-								<Mail className="w-6 h-6 text-cyan-400" />
-								<div>
-									<h3 className="text-white font-semibold">
-										Email
-									</h3>
-									<p className="text-gray-300">
-										alex@portfolio.dev
-									</p>
-								</div>
-							</div>
-
-							<div className="flex items-center gap-4 p-6 bg-slate-800/50 rounded-xl border border-cyan-500/20">
-								<Phone className="w-6 h-6 text-cyan-400" />
-								<div>
-									<h3 className="text-white font-semibold">
-										Phone
-									</h3>
-									<p className="text-gray-300">
-										+1 (555) 123-4567
-									</p>
-								</div>
-							</div>
-
-							<div className="flex items-center gap-4 p-6 bg-slate-800/50 rounded-xl border border-cyan-500/20">
-								<MapPin className="w-6 h-6 text-cyan-400" />
-								<div>
-									<h3 className="text-white font-semibold">
-										Location
-									</h3>
-									<p className="text-gray-300">
-										San Francisco, CA
-									</p>
-								</div>
-							</div>
-						</div>
-
-						<div className="space-y-6">
-							<div>
-								<input
-									type="text"
-									placeholder="Your Name"
-									className="w-full bg-slate-800/50 border border-cyan-500/20 rounded-xl px-6 py-4 text-white placeholder-gray-400 focus:border-cyan-500 focus:outline-none transition-colors duration-300"
-								/>
-							</div>
-
-							<div>
-								<input
-									type="email"
-									placeholder="Your Email"
-									className="w-full bg-slate-800/50 border border-cyan-500/20 rounded-xl px-6 py-4 text-white placeholder-gray-400 focus:border-cyan-500 focus:outline-none transition-colors duration-300"
-								/>
-							</div>
-
-							<div>
-								<textarea
-									rows={5}
-									placeholder="Your Message"
-									className="w-full bg-slate-800/50 border border-cyan-500/20 rounded-xl px-6 py-4 text-white placeholder-gray-400 focus:border-cyan-500 focus:outline-none transition-colors duration-300 resize-none"
-								></textarea>
-							</div>
-
-							<button
-								className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-4 rounded-xl font-medium hover:shadow-lg hover:shadow-cyan-500/25 transform hover:scale-105 transition-all duration-300"
-								onClick={() =>
-									alert("Message sent! (Demo only)")
-								}
-							>
-								Send Message
-							</button>
-						</div>
-					</div> */}
+					<p className="text-center">
+						Please see in my CV for contact information.
+					</p>
 				</div>
 			</section>
 
@@ -571,21 +479,8 @@ const Portfolio = () => {
 								href="#"
 								className="text-gray-400 hover:text-cyan-400 transition-colors duration-300"
 							>
-								{/* <Github className="w-6 h-6" /> */}
 								<i className="fa-brands fa-github text-2xl"></i>
 							</a>
-							{/* <a
-								href="#"
-								className="text-gray-400 hover:text-cyan-400 transition-colors duration-300"
-							>
-								<Linkedin className="w-6 h-6" />
-							</a>
-							<a
-								href="#"
-								className="text-gray-400 hover:text-cyan-400 transition-colors duration-300"
-							>
-								<Twitter className="w-6 h-6" />
-							</a> */}
 						</div>
 					</div>
 				</div>
